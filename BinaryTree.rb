@@ -54,8 +54,26 @@ class BinaryTree
 			queue.push(current_node.right_node)
 		end
 
+		return false if queue.length == 0
+		
 		next_node = queue.shift
-		breadth_first_search(data, next_node, queue)
+		self.breadth_first_search(data, next_node, queue)
+
+	end
+
+	def depth_first_search(data, current_node=@root)
+
+		return if current_node == nil
+
+		return current_node if current_node.data == data
+
+		left = self.depth_first_search(data, current_node.left_node)
+		return left if left
+
+		right = self.depth_first_search(data, current_node.right_node)
+		return right if right
+
+		return false
 
 	end
 
